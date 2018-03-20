@@ -51,6 +51,8 @@ public interface ITableView {
 
     boolean isSortable();
 
+    boolean isReadOnly();
+
     CellRecyclerView getCellRecyclerView();
 
     CellRecyclerView getColumnHeaderRecyclerView();

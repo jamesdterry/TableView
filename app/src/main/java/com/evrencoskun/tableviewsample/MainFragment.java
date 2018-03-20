@@ -118,7 +118,7 @@ public class MainFragment extends Fragment {
     }
 
     private TableView createTableView() {
-        TableView tableView = new TableView(getContext());
+        TableView tableView = new TableView(getContext(), false);
 
         // Set adapter
         mTableViewAdapter = new TableViewAdapter(getContext());

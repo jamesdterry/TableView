@@ -102,27 +102,30 @@ public class TableView extends FrameLayout implements ITableView {
     private boolean mShowHorizontalSeparators = true;
     private boolean mShowVerticalSeparators = true;
     private boolean mIsSortable;
+    private boolean mIsReadOnly;
 
-    public TableView(@NonNull Context context) {
+    public TableView(@NonNull Context context, boolean readOnly) {
         super(context);
-        initialDefaultValues(null);
+        initialDefaultValues(readOnly, null);
         initialize();
     }
 
-    public TableView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public TableView(@NonNull Context context, boolean readOnly, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initialDefaultValues(attrs);
+        initialDefaultValues(readOnly, attrs);
         initialize();
     }
 
-    public TableView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int
+    public TableView(@NonNull Context context, boolean readOnly, @Nullable AttributeSet attrs, @AttrRes int
             defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialDefaultValues(null);
+        initialDefaultValues(readOnly, null);
         initialize();
     }
 
-    private void initialDefaultValues(AttributeSet attrs) {
+    private void initialDefaultValues(boolean readOnly, AttributeSet attrs) {
+        mIsReadOnly = readOnly;
+
         // Dimensions
         mRowHeaderWidth = (int) getResources().getDimension(R.dimen.default_row_header_width);
         mColumnHeaderHeight = (int) getResources().getDimension(R.dimen
@@ -163,6 +166,8 @@ public class TableView extends FrameLayout implements ITableView {
                     mShowVerticalSeparators);
             mShowHorizontalSeparators = a.getBoolean(R.styleable
                     .TableView_show_horizontal_separator, mShowHorizontalSeparators);
+            mIsReadOnly = a.getBoolean(R.styleable
+                    .TableView_read_only, mIsReadOnly);
 
         } finally {
             a.recycle();
@@ -349,6 +354,11 @@ public class TableView extends FrameLayout implements ITableView {
     @Override
     public boolean isSortable() {
         return mIsSortable;
+    }
+
+    @Override
+    public boolean isReadOnly() {
+        return mIsReadOnly;
     }
 
     public void setShowHorizontalSeparators(boolean showSeparators) {
