@@ -106,26 +106,25 @@ public class TableView extends FrameLayout implements ITableView {
 
     public TableView(@NonNull Context context, boolean readOnly) {
         super(context);
-        initialDefaultValues(readOnly, null);
+        mIsReadOnly = readOnly;
+        initialDefaultValues(null);
         initialize();
     }
 
-    public TableView(@NonNull Context context, boolean readOnly, @Nullable AttributeSet attrs) {
+    public TableView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initialDefaultValues(readOnly, attrs);
+        initialDefaultValues(attrs);
         initialize();
     }
 
-    public TableView(@NonNull Context context, boolean readOnly, @Nullable AttributeSet attrs, @AttrRes int
+    public TableView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int
             defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialDefaultValues(readOnly, null);
+        initialDefaultValues(null);
         initialize();
     }
 
-    private void initialDefaultValues(boolean readOnly, AttributeSet attrs) {
-        mIsReadOnly = readOnly;
-
+    private void initialDefaultValues(AttributeSet attrs) {
         // Dimensions
         mRowHeaderWidth = (int) getResources().getDimension(R.dimen.default_row_header_width);
         mColumnHeaderHeight = (int) getResources().getDimension(R.dimen
