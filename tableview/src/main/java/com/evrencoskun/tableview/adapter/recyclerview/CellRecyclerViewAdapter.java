@@ -188,7 +188,9 @@ public class CellRecyclerViewAdapter<C> extends AbstractRecyclerViewAdapter<C> {
 
         if (visibleRecyclerViews.length > 0) {
             for (CellRecyclerView cellRowRecyclerView : visibleRecyclerViews) {
-                cellRowRecyclerView.getAdapter().notifyDataSetChanged();
+                if (cellRowRecyclerView != null) {
+                    cellRowRecyclerView.getAdapter().notifyDataSetChanged();
+                }
             }
         } else {
             notifyDataSetChanged();
