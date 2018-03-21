@@ -186,13 +186,21 @@ public class CellRecyclerViewAdapter<C> extends AbstractRecyclerViewAdapter<C> {
         CellRecyclerView[] visibleRecyclerViews = mTableAdapter.getTableView()
                 .getCellLayoutManager().getVisibleCellRowRecyclerViews();
 
+        boolean missedUpdate = false;
+
         if (visibleRecyclerViews.length > 0) {
             for (CellRecyclerView cellRowRecyclerView : visibleRecyclerViews) {
                 if (cellRowRecyclerView != null) {
                     cellRowRecyclerView.getAdapter().notifyDataSetChanged();
+                } else {
+                    missedUpdate = true;
                 }
             }
         } else {
+            missedUpdate = true;
+        }
+
+        if (missedUpdate) {
             notifyDataSetChanged();
         }
 
